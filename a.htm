@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>まっさー株式会社</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイピングアニメーション</title>
+    <style>
+        body {
+            height: 2000px; /* スクロールするための高さ */
+        }
+        #target {
+            margin-top: 800px; /* タイピングアニメーションを開始する位置 */
+            font-size: 24px;
+            font-family: monospace;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1><a href="/">まっさー株式会社</a></h1>
-    <nav>
-      <ul>
-        <li><a href="/">ホーム</a></li>
-        <li><a href="/about">会社概要</a></li>
-        <li><a href="/service">サービス</a></li>
-        <li><a href="/contact">お問い合わせ</a></li>
-      </ul>
-    </nav>
-  </header>
+    <div id="target"></div>
 
-  <main>
-    <section>
-      <h2>私たちについて</h2>
-      <p>まっさー株式会社は、〇〇な会社です。〇〇なことを目指し、〇〇なサービスを提供しています。</p>
-    </section>
-    </main>
+    <script>
+        const text = "こんにちは、これはタイピングアニメーションです。";
+        const target = document.getElementById('target');
 
-  <footer>
-    <p>Copyright © まっさー株式会社 All Rights Reserved.</p>
-  </footer>
+        function typeWriter(text, i) {
+            if (i < text.length) {
+                target.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(() => typeWriter(text, i), 100); // タイピング速度
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            const targetPosition = target.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (targetPosition < windowHeight) {
+                typeWriter(text, 0);
+                // 一度だけ実行するため、イベントリスナーを削除
+                window.removeEventListener('scroll', arguments.callee);
+            }
+        });
+    </script>
 </body>
 </html>
