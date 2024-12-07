@@ -34,7 +34,7 @@
             const targetPosition = target.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
 
-            if (targetPosition < windowHeight) {
+            if (targetPosition < windowHeight && target.innerHTML === '') {
                 typeWriter(text, 0);
                 // 一度だけ実行するため、イベントリスナーを削除
                 window.removeEventListener('scroll', arguments.callee);
