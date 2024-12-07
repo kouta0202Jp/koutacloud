@@ -4,23 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>タイピングアニメーション</title>
-    <style>
-        body {
-            height: 2000px; /* スクロールするための高さ */
-        }
-        #target {
-            margin-top: 800px; /* タイピングアニメーションを開始する位置 */
-            font-size: 24px;
-            font-family: monospace;
-        }
-    </style>
 </head>
 <body>
-    <div id="target"></div>
+    <div id="jp"></div>
 
     <script>
         const text = "こんにちは、これはタイピングアニメーションです。";
-        const target = document.getElementById('target');
+        const target = document.getElementById('jp');
 
         function typeWriter(text, i) {
             if (i < text.length) {
