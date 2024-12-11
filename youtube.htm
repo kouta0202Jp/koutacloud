@@ -7,15 +7,18 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="content" style="display: none;">
+    <div>
         <h1>保護されたコンテンツ</h1>
-        <p>これはパスワードで保護された内容です。</p>
     </div>
-    <div id="login">
-        <h2>パスワードを入力してください</h2>
-        <input type="password" id="password" placeholder="パスワード">
-        <button id="submit">送信</button>
-        <p id="message"></p>
-    </div>
+    <form id="loginForm">
+        <label for="username">ユーザー名:</label>
+        <input type="text" id="username" required>
+        <br>
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" required>
+        <br>
+        <button type="submit">ログイン</button>
+    </form>
+    <div id="message"></div>
 </body>
 </html>
