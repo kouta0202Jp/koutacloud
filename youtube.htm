@@ -1,9 +1,21 @@
-<!doctype>
-<html>
-  <head>
-    <meta charset=UTF-8">
-  </head>
-  <body>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  </body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パスワード保護</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="content" style="display: none;">
+        <h1>保護されたコンテンツ</h1>
+        <p>これはパスワードで保護された内容です。</p>
+    </div>
+    <div id="login">
+        <h2>パスワードを入力してください</h2>
+        <input type="password" id="password" placeholder="パスワード">
+        <button id="submit">送信</button>
+        <p id="message"></p>
+    </div>
+</body>
 </html>
