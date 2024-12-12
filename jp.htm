@@ -32,9 +32,30 @@ if (document.referrer.indexOf("koutacloud.pages.dev/youtube.htm") == -1) {
    <input type="text" id="inputText" placeholder="URLエンコードされた文字を入力">
     <button id="decodeButton">変換</button>
     <p id="outputText"></p> 
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/IsFs06cw-gY" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-  </body>
-  <script>
+<br>
+    <input type="text" id="youtubeUrl" placeholder="YouTubeのURLを入力してください">
+    <button id="generateBtn">生成</button>
+    <div id="iframeContainer"></div>
+</body>
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const url = document.getElementById('youtubeUrl').value;
+            const videoId = extractVideoId(url);
+            if (videoId) {
+                const iframeHtml = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+                document.getElementById('iframeContainer').innerHTML = iframeHtml;
+            } else {
+                alert('無効なYouTube URLです。');
+            }
+        });
+
+        function extractVideoId(url) {
+            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            const matches = url.match(regex);
+            return matches ? matches[1] : null;
+        }
+    </script>
+<script>
     document.getElementById('decodeButton').addEventListener('click', function() {
     const inputText = document.getElementById('inputText').value;
     const decodedText = decodeURIComponent(inputText);
