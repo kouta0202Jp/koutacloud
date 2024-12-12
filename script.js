@@ -4,14 +4,14 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Base64エンコードされた正しいパスワード
+    // 正しいユーザー名とBase64エンコードされたパスワード
     const validUsername = 'koutadesuga'; // ここに正しいユーザー名を入力
-    const validPasswordBase64 = 'aGFja2Vya291dGE4ODg4'; // ここに正しいパスワードをBase64エンコード
+    const validPasswordBase64 = 'aGFja2Vya291dGE4ODg4'; // 正しいパスワードのBase64エンコード
 
-    // 入力されたパスワードをBase64デコード
-    const decodedPassword = atob(password);
+    // 入力されたパスワードをBase64エンコード
+    const encodedPassword = btoa(password);
 
-    if (username === validUsername && decodedPassword === validPasswordBase64) {
+    if (username === validUsername && encodedPassword === validPasswordBase64) {
         window.location.href = '/jp.htm'; // 認証成功時にリダイレクト
     } else {
         document.getElementById('message').innerText = 'ユーザー名またはパスワードが間違っています。';
