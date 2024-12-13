@@ -3,33 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Iframe Generator</title>
+    <title>機種名アラート</title>
 </head>
 <body>
-    <h1>YouTube Iframe Generator</h1>
-    <input type="text" id="youtubeUrl" placeholder="YouTubeのURLを入力してください">
-    <button onclick="generateIframe()">生成</button>
-    <div id="iframeContainer"></div>
+    <button id="alertButton">ボタンを押す</button>
 
     <script>
-        function generateIframe() {
-            const url = document.getElementById('youtubeUrl').value;
-            const videoId = getVideoId(url);
-            const iframeContainer = document.getElementById('iframeContainer');
-
-            if (videoId) {
-                const iframe = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
-                iframeContainer.innerHTML = iframe;
-            } else {
-                iframeContainer.innerHTML = '無効なURLです。';
-            }
-        }
-
-        function getVideoId(url) {
-            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
-            const match = url.match(regex);
-            return match ? match[1] : null;
-        }
+        document.getElementById('alertButton').addEventListener('click', function() {
+            const deviceName = "iPhone"; // ここに機種名を設定
+            alert(deviceName + "はハッピーです");
+        });
     </script>
 </body>
 </html>
