@@ -1,48 +1,41 @@
-<!doctype>
-<html>
-  <head>
-    <meta charset=UTF-8">
-<style>
-
-    </style>
-<script type="text/javascript">
-<!--
-if (document.referrer.indexOf("358.f5.si/youtube.htm") == -1) {
-    window.location.href = '/youtube.htm';
-} else {
-    document.write('<div style="color:green;">Youtube制限解除ツールBy天才なKouta</div><br>');
-}
-// -->
-</script>
-  </head>
-  <body>
-
-</body>
-    <script>
-        document.getElementById('generateBtn').addEventListener('click', function() {
-            const url = document.getElementById('youtubeUrl').value;
-            const videoId = extractVideoId(url);
-            if (videoId) {
-                const iframeHtml = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
-                document.getElementById('iframeContainer').innerHTML = iframeHtml;
-            } else {
-                alert('無効なYouTube URLです。');
-            }
-        });
-
-        function extractVideoId(url) {
-            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-            const matches = url.match(regex);
-            return matches ? matches[1] : null;
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>...</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
         }
-    </script>
-<script>
-    document.getElementById('decodeButton').addEventListener('click', function() {
-    const inputText = document.getElementById('inputText').value;
-    const decodedText = decodeURIComponent(inputText);
-    const outputElement = document.getElementById('outputText');
-    outputElement.innerText = decodedText;
-    outputElement.style.color = 'green'; // 文字の色を緑に設定
-});
-  </script>
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 影の強さを調整 */
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+        }
+
+        h2 {
+            margin: 0 0 10px;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>カードのタイトル</h2>
+        <p>ここに内容を書いてください。</p>
+    </div>
+</body>
 </html>
