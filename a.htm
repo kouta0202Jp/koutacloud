@@ -3,39 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>影付き中央カード</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 影の強さを調整 */
-            padding: 20px;
-            text-align: center;
-            width: 300px;
-        }
-
-        h2 {
-            margin: 0 0 10px;
-        }
-
-        p {
-            margin: 0;
-        }
-    </style>
+    <title>YouTube Iframe Generator</title>
 </head>
 <body>
-    <div class="card">
-        <h2>カードのタイトル</h2>
-        <p>ここに内容を書いてください。</p>
-    </div>
+    <h1>YouTube Iframe Generator</h1>
+    <input type="text" id="youtubeUrl" placeholder="YouTubeのURLを入力してください">
+    <button onclick="generateIframe()">生成</button>
+    <div id="iframeContainer"></div>
+
+    <script>
+        function generateIframe() {
+            const url = document.getElementById('youtubeUrl').value;
+            const videoId = getVideoId(url);
+            const iframeContainer = document.getElementById('iframeContainer');
+
+            if (videoId) {
+                const iframe = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+                iframeContainer.innerHTML = iframe;
+            } else {
+                iframeContainer.innerHTML = '無効なURLです。';
+            }
+        }
+
+        function getVideoId(url) {
+            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+    </script>
 </body>
 </html>
