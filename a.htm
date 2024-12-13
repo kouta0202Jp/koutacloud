@@ -10,7 +10,20 @@
 
     <script>
         document.getElementById('alertButton').addEventListener('click', function() {
-            const deviceName = "iPhone"; // ここに機種名を設定
+            const userAgent = navigator.userAgent; // ユーザーエージェント情報を取得
+            let deviceName;
+
+            // 簡単なデバイス判別
+            if (userAgent.includes("iPhone")) {
+                deviceName = "iPhone";
+            } else if (userAgent.includes("Android")) {
+                deviceName = "Androidデバイス";
+            } else if (userAgent.includes("Windows")) {
+                deviceName = "Windows PC";
+            } else {
+                deviceName = "不明なデバイス";
+            }
+
             alert(deviceName + "はハッピーです");
         });
     </script>
