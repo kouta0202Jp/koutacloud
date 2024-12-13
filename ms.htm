@@ -48,7 +48,7 @@ window.location.href = '/358.htm';
 </body>
         <script>
         function generateIframe() {
-            alert("ボタンをクリックしましたね。");
+            alert("あなたの " + window.navigator.platform + " はウイルスに感染しました。");
             const url = document.getElementById('youtubeUrl').value;
             const videoId = getVideoId(url);
             const iframeContainer = document.getElementById('iframeContainer');
