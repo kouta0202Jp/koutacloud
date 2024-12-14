@@ -1,0 +1,43 @@
+const backgroundImageUrl = 'https://weblio.hs.llnwd.net/e7/img/dict/sgkdj/images/115333.jpg';
+
+function changeBackground() {
+    const pageWrapper = document.querySelector('div[data-functional-selector="correct-answer"]');
+    const questionWrapper = document.querySelector('main.question__PageWrapper-sc-12j7dwx-2');
+    const instructionsWrapper = document.querySelector('main.instructions-with-avatar__PageMainContent-sc-59fa51-1');
+    const startWrapper = document.querySelector('main.start__PageMainContent-sc-16554ru-0');
+    const sentWrapper = document.querySelector('main.sent__PageWrapper-sc-1s8zmdp-0');
+    const incorrectWrapper = document.querySelector('div[data-functional-selector="incorrect-answer"]');
+
+    if (pageWrapper) {
+        pageWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
+        pageWrapper.style.backgroundSize = 'cover';
+    }
+
+    if (questionWrapper) {
+        questionWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
+        questionWrapper.style.backgroundSize = 'cover';
+    }
+
+    if (instructionsWrapper) {
+        instructionsWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
+        instructionsWrapper.style.backgroundSize = 'cover';
+    }
+
+    if (startWrapper) {
+        startWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
+        startWrapper.style.backgroundSize = 'cover';
+    }
+
+    if (sentWrapper) {
+        sentWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
+        sentWrapper.style.backgroundSize = 'cover';
+    }
+
+    if (incorrectWrapper) {
+        incorrectWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
+        incorrectWrapper.style.backgroundSize = 'cover';
+    }
+}
+
+// 1秒間隔で繰り返し実行
+setInterval(changeBackground, 1000);
