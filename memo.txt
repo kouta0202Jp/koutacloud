@@ -1,0 +1,3 @@
+<main class="pre-question__PageWrapper-sc-cqz5m6-2 gaOOOk">
+<div data-functional-selector="time-up-answer" class="styles__PageWrapper-sc-15a2o5w-0 jVGmyi">
+<main data-functional-selector="results-page" class="podium__PageWrapper-sc-siupzf-0 kBECmv">
