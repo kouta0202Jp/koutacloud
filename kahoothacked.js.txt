@@ -1,4 +1,4 @@
-const backgroundImageUrl = 'https://previews.123rf.com/images/starush/starush1402/starush140200112/26274411-%E3%82%B7%E3%83%8B%E3%82%A2%E9%9D%A2%E7%99%BD%E3%81%84%E3%83%8F%E3%82%B2%E7%94%B7%E3%81%AE%E6%80%A7%E4%BA%A4%E3%81%BE%E3%81%9F%E3%81%AF%E4%B8%AD%E6%8C%87%E3%82%92%E7%A4%BA%E3%81%97%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99.jpg';
+const backgroundImageUrl = 'https://image.itmedia.co.jp/nl/articles/2401/03/matfigmky002.jpg';
 
 function changeBackground() {
     const pageWrapper = document.querySelector('div[data-functional-selector="correct-answer"]');
