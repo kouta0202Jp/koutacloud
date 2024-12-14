@@ -1,4 +1,4 @@
-const backgroundImageUrl = 'https://weblio.hs.llnwd.net/e7/img/dict/sgkdj/images/115333.jpg';
+const backgroundImageUrl = 'https://image.itmedia.co.jp/nl/articles/2401/03/matfigmky002.jpg';
 
 function changeBackground() {
     const pageWrapper = document.querySelector('div[data-functional-selector="correct-answer"]');
@@ -7,6 +7,9 @@ function changeBackground() {
     const startWrapper = document.querySelector('main.start__PageMainContent-sc-16554ru-0');
     const sentWrapper = document.querySelector('main.sent__PageWrapper-sc-1s8zmdp-0');
     const incorrectWrapper = document.querySelector('div[data-functional-selector="incorrect-answer"]');
+    const preQuestionWrapper = document.querySelector('main.pre-question__PageWrapper-sc-cqz5m6-2');
+    const timeUpWrapper = document.querySelector('div[data-functional-selector="time-up-answer"]');
+    const resultsPageWrapper = document.querySelector('main[data-functional-selector="results-page"]');
 
     if (pageWrapper) {
         pageWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
@@ -37,7 +40,22 @@ function changeBackground() {
         incorrectWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
         incorrectWrapper.style.backgroundSize = 'cover';
     }
+
+    if (preQuestionWrapper) {
+        preQuestionWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
+        preQuestionWrapper.style.backgroundSize = 'cover';
+    }
+
+    if (timeUpWrapper) {
+        timeUpWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
+        timeUpWrapper.style.backgroundSize = 'cover';
+    }
+
+    if (resultsPageWrapper) {
+        resultsPageWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
+        resultsPageWrapper.style.backgroundSize = 'cover';
+    }
 }
 
-// 1秒間隔で繰り返し実行
-setInterval(changeBackground, 1000);
+// 0.8秒間隔で繰り返し実行
+setInterval(changeBackground, 800);
