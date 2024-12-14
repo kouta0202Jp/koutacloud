@@ -13,47 +13,47 @@ function changeBackground() {
 
     if (pageWrapper) {
         pageWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
-        pageWrapper.style.backgroundSize = 'cover';
+        pageWrapper.style.backgroundSize = 'contain';
     }
 
     if (questionWrapper) {
         questionWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
-        questionWrapper.style.backgroundSize = 'cover';
+        questionWrapper.style.backgroundSize = 'contain';
     }
 
     if (instructionsWrapper) {
         instructionsWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
-        instructionsWrapper.style.backgroundSize = 'cover';
+        instructionsWrapper.style.backgroundSize = 'contain';
     }
 
     if (startWrapper) {
         startWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
-        startWrapper.style.backgroundSize = 'cover';
+        startWrapper.style.backgroundSize = 'contain';
     }
 
     if (sentWrapper) {
         sentWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
-        sentWrapper.style.backgroundSize = 'cover';
+        sentWrapper.style.backgroundSize = 'contain';
     }
 
     if (incorrectWrapper) {
         incorrectWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
-        incorrectWrapper.style.backgroundSize = 'cover';
+        incorrectWrapper.style.backgroundSize = 'contain';
     }
 
     if (preQuestionWrapper) {
         preQuestionWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
-        preQuestionWrapper.style.backgroundSize = 'cover';
+        preQuestionWrapper.style.backgroundSize = 'contain';
     }
 
     if (timeUpWrapper) {
         timeUpWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
-        timeUpWrapper.style.backgroundSize = 'cover';
+        timeUpWrapper.style.backgroundSize = 'contain';
     }
 
     if (resultsPageWrapper) {
         resultsPageWrapper.style.backgroundImage = `url('${backgroundImageUrl}')`;
-        resultsPageWrapper.style.backgroundSize = 'cover';
+        resultsPageWrapper.style.backgroundSize = 'contain';
     }
 }
 
