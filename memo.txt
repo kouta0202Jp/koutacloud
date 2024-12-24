@@ -1,2 +1,0 @@
-<main class="vertical-alignment__VerticalAlignmentCenter-sc-ridjbp-1 dCXtdR">
-<div data-functional-selector="theme-wrapper-background" class="theme__Background-sc-5jtkdy-0 jPReMP">
