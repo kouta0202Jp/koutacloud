@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>音楽再生ボタン</title>
+</head>
+<body>
+  <button id="playPauseButton">再生/停止</button>
+  <audio id="myAudio" src="http://kouta8888.pages.dev/My Heart [NCS Release].mp3"></audio>
+
+  <script>
+const playPauseButton = document.getElementById('playPauseButton');
+const audio = document.getElementById('myAudio');
+
+playPauseButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    playPauseButton.textContent = '停止';
+  } else {
+    audio.pause();
+    playPauseButton.textContent = '再生';
+  }
+});
+</script>
+</body>
+</html>
