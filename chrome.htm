@@ -3,7 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D回転 ChromeOS</title>
+    <title>ChromeOS</title>
+        <script>
+        // ページ読み込み時に全画面にする関数
+        function goFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox用
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera用
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE用
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
+        // ページ読み込み時に自動で全画面を試みる
+        window.onload = goFullscreen;
+    </script>
     <style>
         body {
             background-color: black; /* 背景を黒に設定 */
