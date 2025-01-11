@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D回転 ChromeOS</title>
+    <style>
+        body {
+            background-color: black; /* 背景を黒に設定 */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .wrapper {
+            perspective: 1000px; /* 視点をさらに深くして立体感を強調 */
+        }
+
+        .text3d {
+            font-size: 200px; /* 文字を大きく設定 */
+            font-weight: bold;
+            color: silver; /* 文字色はシルバー */
+            text-align: center;
+            transform-style: preserve-3d;
+            animation: rotateText 10s infinite linear; /* 回転アニメーション */
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); /* 文字に影をつけて立体感を強調 */
+        }
+
+        /* 回転アニメーション */
+        @keyframes rotateText {
+            0% {
+                transform: rotateY(0deg); /* 初期状態 */
+            }
+            50% {
+                transform: rotateY(180deg); /* 180度回転 */
+            }
+            100% {
+                transform: rotateY(360deg); /* 最後に360度回転 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="text3d">
+            ChromeOS
+        </div>
+    </div>
+</body>
+</html>
