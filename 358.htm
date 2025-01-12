@@ -16,6 +16,50 @@
         <input type="password" id="password" placeholder="パスワード">
         <button id="submit">送信</button>
         <p id="message"></p>
+        <canvas id="myCanvas" width="400" height="200"></canvas>
+<script>
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+
+const texts = ["監視中", "Webバリア"];
+let currentTextIndex = 0;
+let displayTime = 2000; // 2秒
+let lastSwitchTime = Date.now();
+
+function draw() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+// テキストの設定
+ctx.font = "30px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+
+const text = texts[currentTextIndex];
+const textWidth = ctx.measureText(text).width;
+
+// ボーダーの描画
+const padding = 10; // 余白
+ctx.fillStyle = "white"; // ボーダー内の背景色
+ctx.fillRect((canvas.width - textWidth - padding * 2) / 2, (canvas.height - 40) / 2, textWidth + padding * 2, 40);
+ctx.strokeStyle = "black"; // ボーダーの色
+ctx.lineWidth = 2; // ボーダーの太さ
+ctx.strokeRect((canvas.width - textWidth - padding * 2) / 2, (canvas.height - 40) / 2, textWidth + padding * 2, 40);
+
+// テキストの描画
+ctx.fillStyle = "black"; // テキストの色
+ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+// テキストの切り替え
+if (Date.now() - lastSwitchTime > displayTime) {
+currentTextIndex = (currentTextIndex + 1) % texts.length;
+lastSwitchTime = Date.now();
+}
+
+requestAnimationFrame(draw);
+}
+
+draw();
+</script>
     </div>
 </body>
 </html>
