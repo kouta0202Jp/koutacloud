@@ -2,25 +2,17 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Caps Lock無効化</title>
+    <title>Metaキー無効化</title>
   </head>
   <body>
-    <p>Caps Lockキーを押してみてください。無効化されるはずです。</p>
+    <p>Metaキーを押してみてください。無効化されるはずです。</p>
     <script>
       document.addEventListener('keydown', function(event) {
-        // デバッグ用ログ（すべてのキー入力を確認）
-        console.log(`Key pressed: ${event.code}, Key: ${event.key}`);
-
-        // Caps Lockキーの判定
-        if (event.code === 'CapsLock') {
+        // Metaキー（左または右）を無効化
+        if (event.code === 'MetaLeft' || event.code === 'MetaRight') {
           event.preventDefault(); // デフォルトの動作を防ぐ
-          console.log('Caps Lockキーが無効化されました。');
+          console.log('Metaキー（WindowsキーまたはCommandキー）は無効化されました。');
         }
-      });
-
-      document.addEventListener('keyup', function(event) {
-        // デバッグ用：キーを離したときのイベントも記録
-        console.log(`Key released: ${event.code}`);
       });
     </script>
   </body>
