@@ -1,19 +1,19 @@
-<!doctype>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF=8">
+    <meta charset="UTF-8">
+    <title>Caps Lock無効化</title>
   </head>
   <body>
     TEST
     <script>
       document.addEventListener('keydown', function(event) {
-  // Caps Lockキー（検索キーに対応する可能性がある）のキーコードは「20」
-  if (event.code === 'CapsLock') {
-    event.preventDefault();
-    console.log('Caps Lock/Searchキーは無効化されました。');
-  }
-});
-
+        // Caps Lockキー（検索キーに対応する可能性がある）のキーコードは「20」
+        if (event.code === 'CapsLock') {
+          event.preventDefault();
+          console.log('Caps Lock/Searchキーは無効化されました。');
+        }
+      });
     </script>
   </body>
 </html>
