@@ -7,13 +7,32 @@
   <body>
     <p>Metaキーを押してみてください。無効化されるはずです。</p>
     <script>
-      document.addEventListener('keydown', function(event) {
-        // Metaキー（左または右）を無効化
-        if (event.code === 'MetaLeft' || event.code === 'MetaRight') {
-          event.preventDefault(); // デフォルトの動作を防ぐ
-          alert('Metaキー（WindowsキーやCommandキー）は無効化されました。');
-        }
-      });
-    </script>
+document.addEventListener('keydown', function(event) {
+    // Ctrl + Shift + Q
+    if (event.ctrlKey && event.shiftKey && event.key === 'Q') {
+        event.preventDefault();
+    }
+    // Meta (Command) + L
+    else if (event.metaKey && event.key === 'l') {
+        event.preventDefault();
+    }
+    // Shift + Meta (Command) + L
+    else if (event.shiftKey && event.metaKey && event.key === 'l') {
+        event.preventDefault();
+    }
+    // Ctrl + Shift + I
+    else if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+        event.preventDefault();
+    }
+    // Ctrl + U
+    else if (event.ctrlKey && event.key === 'U') {
+        event.preventDefault();
+    }
+    // F12
+    else if (event.key === 'F12') {
+        event.preventDefault();
+    }
+});
+
   </body>
 </html>
