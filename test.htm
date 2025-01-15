@@ -8,31 +8,9 @@
     <p>Metaキーを押してみてください。無効化されるはずです。</p>
     <script>
 document.addEventListener('keydown', function(event) {
-    // Ctrl + Shift + Q
-    if (event.ctrlKey && event.shiftKey && event.key === 'Q') {
-        event.preventDefault();
-    }
-    // Meta (Command) + L
-    else if (event.metaKey && event.key === 'l') {
-        event.preventDefault();
-    }
-    // Shift + Meta (Command) + L
-    else if (event.shiftKey && event.metaKey && event.key === 'l') {
-        event.preventDefault();
-    }
-    // Ctrl + Shift + I
-    else if (event.ctrlKey && event.shiftKey && event.key === 'I') {
-        event.preventDefault();
-    }
-    // Ctrl + U
-    else if (event.ctrlKey && event.key === 'U') {
-        event.preventDefault();
-    }
-    // F12
-    else if (event.key === 'F12') {
-        event.preventDefault();
-    }
+    console.log(event.key);
 });
+    </script>
 
   </body>
 </html>
