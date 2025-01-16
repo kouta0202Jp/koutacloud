@@ -1,61 +1,37 @@
-(function() {
-    const redirectUrl = "https://example.com";
+// 開発者ツールを検出してリダイレクトさせるための関数
+let devtoolsOpen = false;
+const threshold = 160; // 開発者ツールの表示時に差異が出る幅を設定
 
-    // 対策案 1: 開発者ツールのショートカットキーの無効化
-    document.addEventListener('keydown', function(event) {
-        if ((event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
-            (event.ctrlKey && event.shiftKey && event.keyCode === 74) || // Ctrl+Shift+J
-            (event.ctrlKey && event.keyCode === 85) || // Ctrl+U
-            (event.keyCode === 123)) { // F12
-            event.preventDefault();
-            alert("開発者ツールの使用は禁止されています。");
-        }
-    });
+// F12や右クリックを無効にする
+document.addEventListener('keydown', function(e) {
+  // F12キー (keyCode 123) やCtrl+Shift+Iなどで開く開発者ツールを防ぐ
+  if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) { 
+    e.preventDefault();
+    alert('開発者ツールを開こうとしています!');
+  }
+});
 
-    // 対策案 2: コンソールを監視して再表示を防ぐ
-    const detectDevTools = function() {
-        const threshold = 160; // 開発者ツールの一般的なサイズを検出
-        if (window.outerWidth - window.innerWidth > threshold || 
-            window.outerHeight - window.innerHeight > threshold) {
-            window.location.href = redirectUrl;
-        }
-    };
-    setInterval(detectDevTools, 1000); // 1秒ごとにチェック
+// 右クリックを無効化してアラートを出す
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  alert('右クリックが無効化されています。');
+});
 
-    // 対策案 3: リサイズ監視を強化
-    let lastWindowSize = { width: window.outerWidth, height: window.outerHeight };
-    window.addEventListener('resize', function() {
-        if (window.outerWidth !== lastWindowSize.width || window.outerHeight !== lastWindowSize.height) {
-            window.location.href = redirectUrl;
-        }
-        lastWindowSize = { width: window.outerWidth, height: window.outerHeight };
-    });
-
-    // 対策案 4: DOM要素の監視
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function() {
-            // DOMの変更が検出されたらリダイレクト
-            window.location.href = redirectUrl;
-        });
-    });
-    observer.observe(document.body, {
-        childList: true,
-        attributes: true,
-        subtree: true
-    });
-
-    // 対策案 5: コンソールの使用禁止
-    const consoleMethods = ['log', 'warn', 'error', 'info', 'debug'];
-    consoleMethods.forEach(function(method) {
-        console[method] = function() {
-            alert("コンソールの使用は禁止されています。");
-        };
-    });
-
-    // 対策案 6: エラーを意図的に発生させる
-    Object.defineProperty(window, 'devtools', {
-        get: function() {
-            throw new Error("開発者ツールの使用は禁止されています。");
-        }
-    });
-})();
+// 開発者ツールの開放を監視して検出する
+setInterval(function() {
+  const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+  const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+  
+  // 開発者ツールが開かれている場合の検出
+  if (widthThreshold || heightThreshold) {
+    if (!devtoolsOpen) {
+      devtoolsOpen = true;
+      // 開発者ツールが開かれた場合、about:blank にリダイレクト
+      window.location.href = 'about:blank';
+      // デバッガーで強制的に停止（開発者ツールが開いたタイミングで動作）
+      debugger;
+    }
+  } else {
+    devtoolsOpen = false;
+  }
+}, 1000);
