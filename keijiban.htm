@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パスワード確認</title>
+</head>
+<body>
+    <h2>パスワード入力</h2>
+    <input type="password" id="password" placeholder="パスワードを入力">
+    <button onclick="checkPassword()">確認</button>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById('password').value;
+            if (password === '2217') {
+                // パスワードが正しい場合にリダイレクト
+                window.location.href = 'https://kyouyu4444.bbs.wox.cc/'; // リダイレクト先のURL
+            } else {
+                alert('パスワードが間違っています');
+            }
+        }
+    </script>
+</body>
+</html>
