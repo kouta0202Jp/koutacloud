@@ -26,7 +26,7 @@
         text-align: right;
     }
     #time {
-        font-size: 80px; /* 時間を大きく */
+        font-size: 100px; /* 時間を大きく */
         font-weight: bold;
     }
     #image-url {
@@ -35,33 +35,31 @@
 </style>
 </head>
 <body>
-    <div class="info">
-        <div id="time"></div>
-        <div id="image-url"></div>
-    </div>
+<script>
+    const images = [
+        'https://i.pinimg.com/736x/13/a6/e7/13a6e7c7214158c4f676084788520266.jpg',
+        'https://i.pinimg.com/736x/91/f7/3d/91f73dfd831fb2dc915a536e8c33bc40.jpg',
+        'https://i.pinimg.com/736x/68/15/bd/6815bd60471b01d197a08ccd893cdbba.jpg',
+        'https://i.pinimg.com/736x/03/dc/e1/03dce1db6e312a7744b8c3b7c66064bc.jpg'
+    ];
+    let index = 0;
 
-    <script>
-        const images = [
-            'https://i.pinimg.com/736x/13/a6/e7/13a6e7c7214158c4f676084788520266.jpg',
-            'https://i.pinimg.com/736x/91/f7/3d/91f73dfd831fb2dc915a536e8c33bc40.jpg',
-            'https://i.pinimg.com/736x/68/15/bd/6815bd60471b01d197a08ccd893cdbba.jpg',
-            'https://chie-pctr.c.yimg.jp/dk/iwiz-chie/ans-642405401?w=999&h=999&up=0'
-        ];
-        let index = 0;
+    function updateBackground() {
+        document.body.style.backgroundImage = `url(${images[index]})`;
+        document.body.style.backgroundSize = 'cover'; // 画像を画面いっぱいに表示
+        document.body.style.backgroundPosition = 'center'; // 画像の位置を中央に
+        document.getElementById('image-url').textContent = images[index];
+        index = (index + 1) % images.length;
+    }
 
-        function updateBackground() {
-            document.body.style.backgroundImage = `url(${images[index]})`;
-            document.getElementById('image-url').textContent = images[index];
-            index = (index + 1) % images.length;
-        }
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        document.getElementById('time').textContent = timeString;
+    }
 
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            document.getElementById('time').textContent = timeString;
-        }
-
-        function enterFullScreen() {
+    function enterFullScreen() {
+        if (!document.fullscreenElement) {
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
             } else if (document.documentElement.mozRequestFullScreen) {
@@ -72,17 +70,37 @@
                 document.documentElement.msRequestFullscreen(); // IE/Edge
             }
         }
+    }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key !== 'Control') {
-                enterFullScreen(); // Ctrlキー以外が押されたら全画面
+    function exitFullScreen() {
+        if (document.fullscreenElement) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen(); // Firefox
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen(); // Chrome, Safari, Opera
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen(); // IE/Edge
             }
-        });
+        }
+    }
 
-        setInterval(updateBackground, 200000); // 50秒ごとに画像変更
-        setInterval(updateTime, 1000); // 1秒ごとに時間更新
-        updateBackground(); // 初回ロード時に適用
-        updateTime();
-    </script>
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Control') {
+            exitFullScreen(); // Ctrlキーが押されたら全画面解除
+        } else {
+            enterFullScreen(); // Ctrlキー以外が押されたら全画面にする
+        }
+    });
+
+    setInterval(updateBackground, 120000); // 50秒ごとに画像変更
+    setInterval(updateTime, 1000); // 1秒ごとに時間更新
+    updateBackground(); // 初回ロード時に適用
+    updateTime();
+</script>
+
+<p id="time"></p>
+<p id="image-url"></p>
 </body>
 </html>
