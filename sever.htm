@@ -4,106 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>スクリーンセーバー</title>
-<style>
-body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
-    transition: background-image 1s ease-in-out;
-}
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
+        }
 
-.info {
-    position: fixed; /* 常に右下 */
-    bottom: 20px;
-    right: 20px;
-    color: black; /* テキストを黒に */
-    padding: 10px;
-    font-family: Arial, sans-serif;
-    text-align: right;
-}
+        .info {
+            position: fixed; /* 常に右下 */
+            bottom: 20px;
+            right: 20px;
+            color: black; /* テキストを黒に */
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            text-align: right;
+            z-index: 1000; /* 他の要素より前面に表示 */
+        }
 
-#time {
-    font-size: 100px; /* 時間を大きく */
-    font-weight: bold;
-}
+        #time {
+            font-size: 100px; /* 時間を大きく */
+            font-weight: bold;
+        }
 
-#image-url {
-    font-size: 9px; /* URLを小さく */
-}
-
-</style>
+        #image-url {
+            font-size: 9px; /* URLを小さく */
+        }
+    </style>
 </head>
 <body>
-<script>
-    const images = [
-        'https://i.pinimg.com/736x/13/a6/e7/13a6e7c7214158c4f676084788520266.jpg',
-        'https://i.pinimg.com/736x/91/f7/3d/91f73dfd831fb2dc915a536e8c33bc40.jpg',
-        'https://i.pinimg.com/736x/68/15/bd/6815bd60471b01d197a08ccd893cdbba.jpg',
-        'https://i.pinimg.com/736x/03/dc/e1/03dce1db6e312a7744b8c3b7c66064bc.jpg'
-    ];
-    let index = 0;
-
-    function updateBackground() {
-        document.body.style.backgroundImage = `url(${images[index]})`;
-        document.body.style.backgroundSize = 'cover'; // 画像を画面いっぱいに表示
-        document.body.style.backgroundPosition = 'center'; // 画像の位置を中央に
-        document.getElementById('image-url').textContent = images[index];
-        index = (index + 1) % images.length;
-    }
-
-    function updateTime() {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        document.getElementById('time').textContent = timeString;
-    }
-
-    function enterFullScreen() {
-        if (!document.fullscreenElement) {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) {
-                document.documentElement.mozRequestFullScreen(); // Firefox
-            } else if (document.documentElement.webkitRequestFullscreen) {
-                document.documentElement.webkitRequestFullscreen(); // Chrome, Safari, Opera
-            } else if (document.documentElement.msRequestFullscreen) {
-                document.documentElement.msRequestFullscreen(); // IE/Edge
-            }
-        }
-    }
-
-    function exitFullScreen() {
-        if (document.fullscreenElement) {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen(); // Firefox
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen(); // Chrome, Safari, Opera
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen(); // IE/Edge
-            }
-        }
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Control') {
-            exitFullScreen(); // Ctrlキーが押されたら全画面解除
-        } else {
-            enterFullScreen(); // Ctrlキー以外が押されたら全画面にする
-        }
-    });
-
-    setInterval(updateBackground, 120000); // 50秒ごとに画像変更
-    setInterval(updateTime, 1000); // 1秒ごとに時間更新
-    updateBackground(); // 初回ロード時に適用
-    updateTime();
-</script>
-
-<p id="time"></p>
-<p id="image-url"></p>
+    <div id="time">12:34</div> <!-- 時間を表示 -->
+    <div class="info">
+        <div id="image-url">https://example.com/image.jpg</div> <!-- URL -->
+    </div>
 </body>
 </html>
