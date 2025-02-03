@@ -4,43 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>スクリーンセーバー</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-size: cover;
-            background-position: center;
-            transition: background-image 1s ease-in-out;
-        }
-
-        .info {
-            position: fixed; /* 常に右下 */
-            bottom: 20px;
-            right: 20px;
-            color: black; /* テキストを黒に */
-            padding: 10px;
-            font-family: Arial, sans-serif;
-            text-align: right;
-            z-index: 1000; /* 他の要素より前面に表示 */
-        }
-
-        #time {
-            font-size: 100px; /* 時間を大きく */
-            font-weight: bold;
-        }
-
-        #image-url {
-            font-size: 9px; /* URLを小さく */
-        }
-    </style>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        background-position: center;
+        transition: background-image 1s ease-in-out;
+    }
+    .info {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background: transparent;
+        color: white;
+        padding: 15px;
+        font-family: Arial, sans-serif;
+        text-align: right;
+    }
+    #time {
+        font-size: 100px; /* 時間を大きく */
+        font-weight: bold;
+    }
+    #image-url {
+        font-size: 9px; /* URLを小さく */
+    }
+</style>
 </head>
 <body>
-    <div id="time">12:34</div> <!-- 時間を表示 -->
     <div class="info">
-        <div id="image-url">https://example.com/image.jpg</div> <!-- URL -->
+        <div id="time"></div>
+        <div id="image-url"></div>
     </div>
+
+    <script>
+        const images = [
+            'https://i.pinimg.com/736x/13/a6/e7/13a6e7c7214158c4f676084788520266.jpg',
+            'https://i.pinimg.com/736x/92/f4/03/92f4032d492cb47a675a26d7f6bcbefb.jpg',
+            'https://i.pinimg.com/736x/ec/b5/b6/ecb5b6d720b5addd453240c586535ed6.jpg',
+            'https://i.pinimg.com/736x/6e/69/68/6e696859c4ecdab373162e42ca7a3ec4.jpg',
+            'https://i.pinimg.com/736x/fd/51/d8/fd51d8e5c2aff28678f87c472c612ce0.jpg',
+            'https://i.pinimg.com/736x/a8/4a/06/a84a06c0e7a7d6daf5e3a3c697d95ebf.jpg',
+            'https://i.pinimg.com/736x/29/6f/95/296f95379bff89aeeaacaf99820fa900.jpg'
+        ];
+        let index = 0;
+
+        function updateBackground() {
+            document.body.style.backgroundImage = `url(${images[index]})`;
+            document.getElementById('image-url').textContent = images[index];
+            index = (index + 1) % images.length;
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('time').textContent = timeString;
+        }
+
+        function enterFullScreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen(); // Firefox
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen(); // Chrome, Safari, Opera
+            } else if (document.documentElement.msRequestFullscreen) {
+                document.documentElement.msRequestFullscreen(); // IE/Edge
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Control') {
+                enterFullScreen(); // Ctrlキー以外が押されたら全画面
+            }
+        });
+
+        setInterval(updateBackground, 200000); // 50秒ごとに画像変更
+        setInterval(updateTime, 1000); // 1秒ごとに時間更新
+        updateBackground(); // 初回ロード時に適用
+        updateTime();
+    </script>
 </body>
 </html>
