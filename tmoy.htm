@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Wave</title>
+    <style>
+        /* ヘッダー */
+        header {
+          width: 100%;
+          padding: 30px 20px;
+          background: rgba(0, 0, 0, 0.671);
+          position: fixed;
+          top: 0;
+          left: 0;
+          border: 4px solid #1d1b77;
+          color: white;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        /* ロゴ（Next wave） */
+        .logo {
+          text-decoration: none;
+          color: white;
+          font-size: 24px;
+          font-weight: bold;
+        }
+
+        /* 通常のナビゲーション */
+        .clickname {
+          display: flex;
+          gap: 20px;
+        }
+
+        .clickname a {
+          text-decoration: none;
+          color: white;
+        }
+
+        a.yesunder {
+          text-decoration: underline;
+          color: white;
+        }
+
+        a.yesunder2 {
+          text-decoration: underline;
+          color: rgba(38, 0, 255, 0.8);
+          -webkit-text-stroke: 2px #ffffff;
+        }
+
+        /* ハンバーガーメニュー（初期は非表示） */
+        .hamburger-menu {
+          display: none;
+          flex-direction: column;
+          cursor: pointer;
+          gap: 5px;
+        }
+
+        .hamburger-menu span {
+          width: 30px;
+          height: 3px;
+          background: white;
+          display: block;
+          transition: 0.3s;
+        }
+
+        /* スマホ用レスポンシブ対応 */
+        @media screen and (max-width: 768px) {
+          /* メニューのみ非表示（Next waveはそのまま） */
+          .clickname {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+          }
+
+          /* メニュー表示時 */
+          .clickname.active {
+            display: flex;
+          }
+
+          /* ハンバーガーメニューを表示 */
+          .hamburger-menu {
+            display: flex;
+          }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- ロゴ -->
+    <h1>
+        <a href="https://discord.gg/nextwaves" class="logo">Next wave</a>
+    </h1>
+    
+    <!-- ナビゲーションメニュー -->
+    <nav>
+        <div class="clickname">
+            <a href="about.html" class="yesunder">About</a>　
+            <a href="concept.html" class="yesunder">Concept</a>
+        </div>
+        
+        <!-- ハンバーガーメニュー -->
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
+
+<!-- コンテンツ部分 -->
+<main>
+    <!-- コンテンツを書く -->
+</main>
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menu = document.querySelector(".clickname");
+        const hamburger = document.querySelector(".hamburger-menu");
+
+        hamburger.addEventListener("click", function () {
+            menu.classList.toggle("active");
+        });
+    });
+</script>
+
+</body>
+</html>
