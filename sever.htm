@@ -3,89 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スクリーンセーバー</title>
-<style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-size: cover;
-        background-position: center;
-        transition: background-image 1s ease-in-out;
-    }
-    .info {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        background: transparent;
-        color: white;
-        padding: 15px;
-        font-family: Arial, sans-serif;
-        text-align: right;
-    }
-    #time {
-        font-size: 100px; /* 時間を大きく */
-        font-weight: bold;
-    }
-    #image-url {
-        font-size: 9px; /* URLを小さく */
-    }
-</style>
+    <title>おしゃれな検索バー</title>
+    <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.pinimg.com/736x/b5/d6/09/b5d609418ccc9fec32284105e65bf0c9.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-container {
+            padding: 20px;
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%; /* 幅を100%に設定 */
+            max-width: 600px; /* 最大幅を設定 */
+            box-sizing: border-box; /* 幅にpaddingを含める */
+        }
+
+        .search-input {
+            background: #fff;
+            color: #000;
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+            border: 1px solid #444;
+        }
+
+        .search-input::placeholder {
+            color: #000;  /* placeholderの文字色 */
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .search-button:hover {
+            background-color: #222;
+        }
+    </style>
 </head>
 <body>
-    <div class="info">
-        <div id="time"></div>
-        <div id="image-url"></div>
+
+    <div class="search-container">
+        <form action="https://www.google.com/search" method="get" target="_blank" style="display: flex; width: 100%;">
+            <input type="text" class="search-input" name="q" placeholder="検索...">
+            <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #fff;"></i></button>
+        </form>
     </div>
 
-    <script>
-        const images = [
-            '../image/1.jpg',
-            '../image/2.jpg',
-            '../image/3.jpg',
-            '../image/4.jpg',
-            '../image/5.jpg',
-            '../image/6.jpg',
-            '../image/7.jpg'
-        ];
-        let index = 0;
-
-        function updateBackground() {
-            document.body.style.backgroundImage = `url(${images[index]})`;
-            document.getElementById('image-url').textContent = images[index];
-            index = (index + 1) % images.length;
-        }
-
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            document.getElementById('time').textContent = timeString;
-        }
-
-        function enterFullScreen() {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) {
-                document.documentElement.mozRequestFullScreen(); // Firefox
-            } else if (document.documentElement.webkitRequestFullscreen) {
-                document.documentElement.webkitRequestFullscreen(); // Chrome, Safari, Opera
-            } else if (document.documentElement.msRequestFullscreen) {
-                document.documentElement.msRequestFullscreen(); // IE/Edge
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key !== 'Control') {
-                enterFullScreen(); // Ctrlキー以外が押されたら全画面
-            }
-        });
-
-        setInterval(updateBackground, 120000); // 50秒ごとに画像変更
-        setInterval(updateTime, 1000); // 1秒ごとに時間更新
-        updateBackground(); // 初回ロード時に適用
-        updateTime();
-    </script>
 </body>
 </html>
