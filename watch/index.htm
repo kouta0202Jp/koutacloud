@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // URLSearchParamsを使って 'v' の値を取得
+        const params = new URLSearchParams(window.location.search);
+        const videoId = params.get('v');
+
+        if (videoId) {
+            // v の値だけを使ってリダイレクト（履歴なし）
+            location.replace(`https://runtu.be/watch/${videoId}`);
+        }
+    </script>
+</head>
+<body>
+    <p>リダイレクト中...</p>
+</body>
+</html>
