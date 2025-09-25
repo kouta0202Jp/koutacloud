@@ -1,60 +1,34 @@
-<!doctype html>
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>緯度経度と住所を送信</title>
+<meta charset="utf-8">
+<script>
+function test() {
+    navigator.geolocation.getCurrentPosition(test2);
+}
+
+function test2(position) {
+
+    var geo_text = "緯度:" + position.coords.latitude + "\n";
+    geo_text += "経度:" + position.coords.longitude + "\n";
+    geo_text += "高度:" + position.coords.altitude + "\n";
+    geo_text += "位置精度:" + position.coords.accuracy + "\n";
+    geo_text += "高度精度:" + position.coords.altitudeAccuracy  + "\n";
+    geo_text += "移動方向:" + position.coords.heading + "\n";
+    geo_text += "速度:" + position.coords.speed + "\n";
+
+    var date = new Date(position.timestamp);
+
+    geo_text += "取得時刻:" + date.toLocaleString() + "\n";
+
+    alert(geo_text);
+
+}
+</script>
 </head>
 <body>
-  <button id="sendBtn">送信</button>
 
-  <script>
-    const POST_URL = "https://script.google.com/macros/s/AKfycbzUbSnOFccxLVWsIgDkZdLw0TqDSE3ERPTzK2YqDW891X1NK3unkPP7IbRQ7vGs6bQH/exec";
+<button onclick="test()">test</button>
 
-    document.getElementById('sendBtn').addEventListener('click', () => {
-      if (!navigator.geolocation) {
-        alert("ブラウザが位置情報をサポートしていません");
-        return;
-      }
-
-      navigator.geolocation.getCurrentPosition(async (pos) => {
-        const lat = pos.coords.latitude;
-        const lon = pos.coords.longitude;
-        const time = new Date(pos.timestamp).toISOString();
-
-        try {
-          // OpenStreetMapで住所取得
-          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=ja`);
-          const data = await res.json();
-          const address = data.display_name || "";
-
-          const payload = {
-            timestamp: time,
-            latitude: lat,
-            longitude: lon,
-            address: address
-          };
-
-          const postRes = await fetch(POST_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-
-          const result = await postRes.json();
-          if (postRes.ok) {
-            alert("送信成功: " + result.file);
-          } else {
-            alert("送信失敗: " + result.message);
-          }
-
-        } catch (e) {
-          alert("送信中にエラー: " + e.message);
-        }
-
-      }, (err) => {
-        alert("位置情報取得エラー: " + err.message);
-      }, { enableHighAccuracy: true });
-    });
-  </script>
 </body>
 </html>
