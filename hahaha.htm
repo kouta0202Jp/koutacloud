@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>座標と住所を送信</title>
+</head>
+<body>
+  <button id="sendBtn">緯度・経度と住所を送信</button>
+
+  <script>
+    const POST_URL = "https://script.google.com/macros/s/AKfycbwTz4-qC_VKRP9TaPNL7xwn5jxM4cbXy75vUPGrdhEko7Y8SSodtWWvSk5R15t7r2g5/exec";
+
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        alert("このブラウザは位置情報をサポートしていません。");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        const time = new Date(pos.timestamp).toISOString();
+
+        try {
+          // OpenStreetMap Nominatim で住所を取得
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=ja`);
+          const data = await res.json();
+          const address = data.display_name || "";
+
+          // 送信データ
+          const payload = {
+            timestamp: time,
+            latitude: lat,
+            longitude: lon,
+            address: address
+          };
+
+          // POSTリクエストを送信
+          const postRes = await fetch(POST_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (postRes.ok) {
+            alert("データを送信しました！");
+          } else {
+            alert("送信に失敗しました: " + postRes.status);
+          }
+
+        } catch (e) {
+          alert("住所の取得に失敗しました: " + e.message);
+        }
+
+      }, (err) => {
+        alert("位置情報の取得に失敗しました: " + err.message);
+      }, { enableHighAccuracy: true });
+    });
+  </script>
+</body>
+</html>
