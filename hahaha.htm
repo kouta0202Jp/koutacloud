@@ -1,34 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta charset="utf-8">
-<script>
-function test() {
-    navigator.geolocation.getCurrentPosition(test2);
-}
-
-function test2(position) {
-
-    var geo_text = "緯度:" + position.coords.latitude + "\n";
-    geo_text += "経度:" + position.coords.longitude + "\n";
-    geo_text += "高度:" + position.coords.altitude + "\n";
-    geo_text += "位置精度:" + position.coords.accuracy + "\n";
-    geo_text += "高度精度:" + position.coords.altitudeAccuracy  + "\n";
-    geo_text += "移動方向:" + position.coords.heading + "\n";
-    geo_text += "速度:" + position.coords.speed + "\n";
-
-    var date = new Date(position.timestamp);
-
-    geo_text += "取得時刻:" + date.toLocaleString() + "\n";
-
-    alert(geo_text);
-
-}
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>位置情報取得と逆ジオコーディング</title>
 </head>
 <body>
+    <h1>位置情報を取得して住所を表示</h1>
+    <button onclick="getLocation()">位置情報を取得</button>
 
-<button onclick="test()">test</button>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const latitude = position.coords.latitude;  // 緯度
+                        const longitude = position.coords.longitude; // 経度
+                        
+                        // 位置情報をコンソールに表示（デバッグ用）
+                        console.log(`緯度: ${latitude}, 経度: ${longitude}`);
+                        
+                        // 逆ジオコーディングを実行
+                        reverseGeocode(latitude, longitude);
+                    },
+                    function(error) {
+                        let errorMessage = '';
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = '位置情報の取得を拒否されました。';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = '位置情報が利用できません。';
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = '位置情報の取得がタイムアウトしました。';
+                                break;
+                            default:
+                                errorMessage = '不明なエラーが発生しました。';
+                                break;
+                        }
+                        alert(errorMessage);
+                    },
+                    {
+                        enableHighAccuracy: true,  // 高精度モード
+                        timeout: 10000,            // 10秒タイムアウト
+                        maximumAge: 0              // キャッシュなし
+                    }
+                );
+            } else {
+                alert('このブラウザはGeolocationをサポートしていません。');
+            }
+        }
 
+        async function reverseGeocode(latitude, longitude) {
+            try {
+                // Nominatim APIのURL（OpenStreetMap）
+                const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`;
+                
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'User -Agent': 'YourApp/1.0'  // Nominatimポリシー: User-Agentを指定
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('APIリクエストが失敗しました');
+                }
+                
+                const data = await response.json();
+                
+                if (data && data.display_name) {
+                    // 住所を表示（例: 国 + 都道府県 + 市区町村 + 番地）
+                    const address = data.display_name;
+                    alert(`取得した位置情報:\n緯度: ${latitude}\n経度: ${longitude}\n住所: ${address}`);
+                } else {
+                    alert('住所の取得に失敗しました。');
+                }
+            } catch (error) {
+                console.error('逆ジオコーディングエラー:', error);
+                alert('逆ジオコーディングでエラーが発生しました: ' + error.message);
+            }
+        }
+    </script>
 </body>
 </html>
